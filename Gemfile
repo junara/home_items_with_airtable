@@ -10,6 +10,10 @@ gem "dynomite"
 # airtable
 gem 'airtable'
 
+# for qr code
+gem 'rqrcode'
+gem 'rqrcode_png'
+
 # development and test groups are not bundled as part of the deployment
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

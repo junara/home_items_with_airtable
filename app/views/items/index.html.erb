@@ -9,7 +9,12 @@
           <% end %>
         </div>
         <div class="col-9">
-          <%= link_to item.name, item_path(item.id) %>
+          <div>
+            <%= link_to item.name, item_path(item.id) %>
+          </div>
+          <p>
+            <%= item.note %>
+          </p>
         </div>
       </div>
     </div>

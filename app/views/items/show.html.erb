@@ -2,9 +2,19 @@
   <%= link_to '> item一覧', items_path %>
   <%= link_to " > #{@item.name}", item_path(@item.id) %>
 </div>
+<div class="row">
+  <div class="col-2">
+    <%== @qrcode.as_svg(module_size: 1) %>
+  </div>
+  <div class="h2 col-10">
+    <%= @item.name %>
+  </div>
+</div>
 
-<div class="h2">
-  <%= @item.name %>
+<div class="">
+  <p>
+    <%= @item.note %>
+  </p>
 </div>
 <div>
   <%= form_with(url: "#{@item.id}/maintain", method: :post, local: true) do |form| %>

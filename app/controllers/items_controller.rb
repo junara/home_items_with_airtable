@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
   def show
     @item = AirtableItem.find(params[:item_id])
     @maintenances = AirtableItem.maintenances(@item)
+    @qrcode = RQRCode::QRCode.new(@item.url, :size => 9, :level => :h)
   end
 
   def maintain
