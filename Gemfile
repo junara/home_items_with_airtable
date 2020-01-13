@@ -7,6 +7,9 @@ gem "webpacker", git: "https://github.com/tongueroo/webpacker.git", branch: "jet
 
 gem "dynomite"
 
+# airtable
+gem 'airtable'
+
 # development and test groups are not bundled as part of the deployment
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

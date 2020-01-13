@@ -1,0 +1,14 @@
+<div>
+  <%= link_to 'item一覧', items_path %>
+</div>
+
+<div class="h2">
+  <%= @item.name %>
+</div>
+<div class="row">
+  <% @item.attachments && @item.attachments.each do |attachment| %>
+    <%= link_to attachment['url'], class: 'col-6' do %>
+      <%= image_tag(attachment['thumbnails']['large']['url'], class: 'img-fluid') %>
+    <% end %>
+  <% end %>
+</div>

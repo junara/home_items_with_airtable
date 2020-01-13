@@ -1,0 +1,17 @@
+<div class="">
+  <% @items.each do |item| %>
+    <div class="card mb-3">
+      <div class="row no-gutters">
+        <div class="col-3">
+          <% attachment = item.attachments&.first %>
+          <% if attachment %>
+            <%= image_tag(attachment['thumbnails']['large']['url'], class: 'img-fluid') %>
+          <% end %>
+        </div>
+        <div class="col-9">
+          <%= link_to item.name, item_path(item.record_id) %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
