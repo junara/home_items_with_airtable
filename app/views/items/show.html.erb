@@ -1,10 +1,30 @@
 <div>
-  <%= link_to 'item一覧', items_path %>
+  <%= link_to '> item一覧', items_path %>
+  <%= link_to " > #{@item.name}", item_path(@item.id) %>
 </div>
 
 <div class="h2">
   <%= @item.name %>
 </div>
+<div>
+  <%= form_with(url: "#{@item.id}/maintain", method: :post, local: true) do |form| %>
+    <%= form.text_field :note %>
+    <%= form.submit 'メンテ' %>
+  <% end %>
+</div>
+<% @maintenances.each do |maintenance| %>
+  <div class="badge badge-primary badge jets-element-to-delete">
+    <div>
+      <%= maintenance.date %>
+    </div>
+    <div>
+      <%= maintenance.note %>
+    </div>
+    <div>
+      <%= link_to '削除', "#{@item.id}/maintenances/#{maintenance.id}", method: :delete, class: 'text-white', data: { confirm: 'メンテ記録を削除しますか？' } %>
+    </div>
+  </div>
+<% end %>
 <div class="row">
   <% @item.attachments && @item.attachments.each do |attachment| %>
     <%= link_to attachment['url'], class: 'col-6' do %>
@@ -12,3 +32,4 @@
     <% end %>
   <% end %>
 </div>
+
