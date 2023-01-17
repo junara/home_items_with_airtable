@@ -41,7 +41,7 @@ jobs:
         if: |
           contains( github.head_ref , 'npm' )
         run: |
-          echo: 'npmmmmm'
+          echo 'npmmmmm'
       - name: checked
         if: |
           contains( github.head_ref , 'bundler' ) && steps.metadata.outputs.update-type == 'version-update:semver-patch'
@@ -49,7 +49,7 @@ jobs:
           echo 'ceckedddd'
       - name: Approve and enable auto-merge for Dependabot PRs
         if: |
-          contains( github.head_ref , 'bundler' ) && steps.metadata.outputs.update-type == 'version-update:semver-patch'
+          contains( github.head_ref , 'bundler' ) && steps.metadata.outputs.dependency-type == 'direct:development'
         run: |
           gh pr review --approve "$PR_URL"
           gh pr edit "$PR_URL" -t "(auto merged) $PR_TITLE"
