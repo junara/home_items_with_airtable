@@ -37,6 +37,16 @@ jobs:
           contains( github.head_ref , 'bundler' )
         run: |
           echo 'bundlerrrr'
+      - name: metadata bundler
+        if: |
+          steps.metadata.outputs.package-ecosystem == 'bundler'
+        run: |
+          echo 'metadata bundlerrrr'
+      - name: metadata npm
+        if: |
+          steps.metadata.outputs.package-ecosystem == 'npm'
+        run: |
+          echo 'metadata npmmmm'
       - name: npm
         if: |
           contains( github.head_ref , 'npm' )
