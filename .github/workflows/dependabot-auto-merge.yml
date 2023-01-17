@@ -24,7 +24,7 @@ jobs:
           echo '5' ${{ github.base_ref }}
       - name: Approve and enable auto-merge for Dependabot PRs
         if: |
-          ${{ github.head_ref =~ 'bundler' && steps.metadata.outputs.update-type == 'version-update:semver-patch' }}
+          ${{ contains( github.head_ref , 'npm' ) && steps.metadata.outputs.update-type == 'version-update:semver-patch' }}
         run: |
           gh pr review --approve "$PR_URL"
           gh pr edit "$PR_URL" -t "(auto merged) $PR_TITLE"
