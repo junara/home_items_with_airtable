@@ -22,9 +22,34 @@ jobs:
           echo '3' ${{ github.ref_name }}
           echo '4' ${{ github.head_ref }}
           echo '5' ${{ github.base_ref }}
-      - name: Approve and enable auto-merge for Dependabot PRs
+      - name: patched
+        if: |
+          steps.metadata.outputs.update-type == 'version-update:semver-patch'
+        run: |
+          echo 'patcheddddd'
+      - name: developed
+        if: |
+          steps.metadata.outputs.dependency-type == 'direct:development'
+        run: |
+          echo 'developeddddd'
+      - name: bundler
+        if: |
+          contains( github.head_ref , 'bundler' )
+        run: |
+          echo 'bundlerrrr'
+      - name: npm
         if: |
           contains( github.head_ref , 'npm' )
+        run: |
+          echo: 'npmmmmm'
+      - name: checked
+        if: |
+          contains( github.head_ref , 'bundler' ) && steps.metadata.outputs.update-type == 'version-update:semver-patch'
+        run: |
+          echo 'ceckedddd'
+      - name: Approve and enable auto-merge for Dependabot PRs
+        if: |
+          contains( github.head_ref , 'bundler' ) && steps.metadata.outputs.update-type == 'version-update:semver-patch'
         run: |
           gh pr review --approve "$PR_URL"
           gh pr edit "$PR_URL" -t "(auto merged) $PR_TITLE"
