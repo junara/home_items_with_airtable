@@ -16,6 +16,9 @@ jobs:
         uses: dependabot/fetch-metadata@v1.3.5
         with:
           github-token: '${{ secrets.GITHUB_TOKEN }}'
+      - name: if bundler
+        if: |
+          ${{ github.head_ref }}
       - run: |
           echo '1' $GITHUB_REF
           echo '2' ${{ github.ref }}
@@ -24,7 +27,7 @@ jobs:
           echo '5' ${{ github.base_ref }}
       - name: Approve and enable auto-merge for Dependabot PRs
         if: |
-          ${{ steps.metadata.outputs.package-ecosystem == 'bundler' && steps.metadata.outputs.update-type == 'version-update:semver-patch' }}
+          ${{ github.head_ref =~ 'bundler' && steps.metadata.outputs.update-type == 'version-update:semver-patch' }}
         run: |
           gh pr review --approve "$PR_URL"
           gh pr edit "$PR_URL" -t "(auto merged) $PR_TITLE"
