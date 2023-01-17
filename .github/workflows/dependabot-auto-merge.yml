@@ -59,7 +59,7 @@ jobs:
           echo 'ceckedddd'
       - name: Approve and enable auto-merge for Dependabot PRs
         if: |
-          contains( github.head_ref , 'bundler' ) && steps.metadata.outputs.dependency-type == 'direct:development'
+          steps.metadata.outputs.package-ecosystem == 'bundler' && steps.metadata.outputs.dependency-type == 'direct:development'
         run: |
           gh pr review --approve "$PR_URL"
           gh pr edit "$PR_URL" -t "(auto merged) $PR_TITLE"
@@ -68,3 +68,7 @@ jobs:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           PR_TITLE: ${{ github.event.pull_request.title }}
+      - name: package echosystem
+        run: |
+          echo '${{ steps.metadata.outputs.package-ecosystem }}'
+        
