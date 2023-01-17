@@ -16,9 +16,6 @@ jobs:
         uses: dependabot/fetch-metadata@v1.3.5
         with:
           github-token: '${{ secrets.GITHUB_TOKEN }}'
-      - name: if bundler
-        if: |
-          ${{ github.head_ref }}
       - run: |
           echo '1' $GITHUB_REF
           echo '2' ${{ github.ref }}
